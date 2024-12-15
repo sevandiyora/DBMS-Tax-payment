@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Payment Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tax Payment Tracker</h1>
+    <form id="paymentForm">
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount">
+        <label for="payment_date">Payment Date:</label>
+        <input type="date" id="payment_date" name="payment_date">
+        <label for="due_date">Due Date:</label>
+        <select id="due_date" name="due_date" required>
+            <option value="" disabled selected>Select a due date</option> <!-- Blank option -->
+        </select>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" placeholder="paid/unpaid" required>
+        <button type="submit">Save</button>
+    </form>
+
+
+
+    <!-- Transactions Table -->
+    <div class="table-container">
+        <h2>Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Company</th>
+                    <th>Amount</th>
+                    <th>Payment Date</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="paymentsTable"></tbody>
+        </table>
+    </div>
+
+<div class="summary-container">
+    <h2>Summary by Due Date</h2>
+    <label for="filter_due_date">Filter by Due Date:</label>
+    <select id="filter_due_date"></select>
+    <label for="tax_rate">Tax Rate:</label>
+    <input type="number" id="tax_rate" step="0.01" placeholder="e.g., 0.06">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Amount</th>
+                <th>Payment Date</th>
+                <th>Status</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody id="summaryTable"></tbody>
+    </table>
+    <div id="totals">
+        <p id="totalAmount">Total Amount: $0.00</p>
+        <p id="taxRate">Tax Rate: 0.00%</p>
+        <p id="taxDue">Tax Due: $0.00</p>
+    </div>
+</div>
+
+<!-- Popup for Editing -->
+<div id="editPopup" class="popup">
+    <form id="editForm">
+        <input type="hidden" id="edit_id">
+        <label for="edit_company">Company:</label>
+        <input type="text" id="edit_company" required>
+        <label for="edit_amount">Amount:</label>
+        <input type="number" id="edit_amount">
+        <label for="edit_payment_date">Payment Date:</label>
+        <input type="date" id="edit_payment_date">
+        <label for="edit_due_date">Due Date:</label>
+        <select id="edit_due_date" required>
+            <option value="" disabled>Select a due date</option> <!-- Blank option -->
+        </select>
+        <label for="edit_status">Status:</label>
+        <input type="text" id="edit_status" required>
+        <button type="submit">Update</button>
+        <button type="button" onclick="closePopup()">Cancel</button>
+    </form>
+</div>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
+
+
+
+
+
